@@ -53,12 +53,33 @@ def constellation_planet(bot,update):
     update.message.reply_text(constellation)
 
 
+def world_count(bot,update):
+    count_word = []
+    message_text = ((update['message']['text'])[12:]).split()
+    if len(message_text)==0:
+        return update.message.reply_text('Вы ничего не написали...')
+    for world_message in message_text:
+        if len(world_message)<=1:
+            continue
+        else:
+            count_word.append(world_message)
+    update.message.reply_text(len(count_word))
+
+def full_moon(bot,update):
+    moon_date = ((update['message']['text'].split())[1])
+    moon_full_date = ephem.next_full_moon(moon_date)
+    update.message.reply_text(moon_full_date)
+    
+
+
 def main():
     mybot = Updater('1254309533:AAHXtgNikBSAbImTjNAwwrAb2dJA4w-z1KU', request_kwargs=PROXY)
 
     dp = mybot.dispatcher
     dp.add_handler(CommandHandler("start", greet_user))
     dp.add_handler(CommandHandler("planet", constellation_planet))
+    dp.add_handler(CommandHandler("worldcount", world_count))
+    dp.add_handler(CommandHandler("next_full_moon", full_moon))
     dp.add_handler(MessageHandler(Filters.text, talk_to_me))
 
     mybot.start_polling()
