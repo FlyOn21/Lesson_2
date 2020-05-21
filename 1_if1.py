@@ -23,9 +23,9 @@ def main():
         age = int (input('Inpit your age:'))
         if age <= 3:
             print('Learn in kindergarten')
-        elif 3< age <= 16:
+        elif 3 < age <= 16:
             print('Learn in school')
-        elif 16<age<=23:
+        elif 16 < age <= 23:
             print('Learn in university')
         else:
             print('Study well, go work!')

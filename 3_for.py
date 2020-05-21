@@ -19,10 +19,10 @@ def main(school_class):
     all_school = []
     for class_ball in school_class:
         middle_ball = sum(class_ball['scores'])/len(class_ball['scores'])
-        print('Class {},middle ball {}'.format(class_ball['school_class'], middle_ball) )
+        print('Class {}: middle ball {}'.format(class_ball['school_class'], middle_ball) )
         for ball in class_ball['scores']:
             all_school.append(ball)
-    print(f'Middle ball school: {round((sum(all_school)/len(all_school)),2)}')
+    print(f'Middle ball school: {(sum(all_school)/len(all_school)):.2f}')
 
 if __name__ == "__main__":
     main(school_class)

@@ -45,9 +45,9 @@ def talk_to_me(bot, update):
 
 
 def constellation_planet(bot,update):
-    global search_pl
-    planet = (((update['message']['text'].split())[1]).lower)
-    if planet == 'mars':
+    # global search_pl
+    planet = ((update['message']['text'].split())[1])
+    if planet == 'Mars':
         search_pl = ephem.Mars(datetime.now().strftime('%Y/%m/%d'))
     constellation = ephem.constellation(search_pl)
     update.message.reply_text(constellation)
@@ -58,7 +58,7 @@ def main():
 
     dp = mybot.dispatcher
     dp.add_handler(CommandHandler("start", greet_user))
-    dp.add_handler(CommandHandler('planet', constellation_planet))
+    dp.add_handler(CommandHandler("planet", constellation_planet))
     dp.add_handler(MessageHandler(Filters.text, talk_to_me))
 
     mybot.start_polling()

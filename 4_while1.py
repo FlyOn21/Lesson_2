@@ -18,8 +18,8 @@ def ask_user():
         question = input('Как дела?\n')
         if question.capitalize() == 'Хорошо':
             break
-        else:
-            continue
+        # else:
+        #     continue
 
 if __name__ == "__main__":
     ask_user()
