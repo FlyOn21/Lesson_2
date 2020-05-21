@@ -45,10 +45,10 @@ def talk_to_me(bot, update):
 
 
 def constellation_planet(bot,update):
-    # global search_pl
-    planet = ((update['message']['text'].split())[1].capitalize())
-    # if planet == 'Mars':
-    search_pl = getattr(ephem,str(planet(datetime.now().strftime('%Y/%m/%d'))
+    
+    planet_ident = ((update['message']['text'].split())[1])
+    planet = planet_ident.capitalize() 
+    search_pl = getattr(ephem,str(planet))(datetime.now().strftime('%Y/%m/%d'))
     constellation = ephem.constellation(search_pl)
     update.message.reply_text(constellation)
 
