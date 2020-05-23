@@ -26,6 +26,7 @@ share/python-wheels/
 .installed.cfg
 *.egg
 .idea
+Cities_lib.txt
 MANIFEST
 
 # PyInstaller
