@@ -75,16 +75,15 @@ def game_cities_activation(bot,update):
     elif ((update['message']['text'].split())[1]) == 'stop':
         update.message.reply_text('До встречи, приходи поиграем еще')
     else:
-        game_cities(bot,update)   
+        game_cities_lib(bot,update)   
 
-def game_cities(bot,update):
+def game_cities_lib(bot,update):
     cities_lib = []
     cities = open(r'C:\Users\zhogo\PycharmProjects\lesson_2\learn-homework-11\cities_lib.txt','r',encoding='utf-8')
     cities_lib_open = cities.readlines()
     for cities_bad in cities_lib_open:
         cities = cities_bad.strip('\n')
         cities_lib.append(cities)
-    
     print(cities_lib)
 
 def full_moon(bot,update): 
