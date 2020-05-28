@@ -32,6 +32,7 @@ PROXY = {
 }
 
 
+
 def greet_user(bot, update):
     text = 'Вызван /start'
     print(text)
@@ -68,23 +69,55 @@ def world_count(bot,update):
 def game_cities_activation(bot,update):
     # print(update['message']['text'])
     if  update['message']['text'] == '/cities':
+        # print(update)
         command_cities_title = """Для того чтобы поиграть в города вам требуется ввести команду '/cities start',чтобы совершить ход введите сообшение согласно шаблона '/cities {Название города}, для завершения игры введите команду '/cities stop'"""
         return update.message.reply_text(command_cities_title)
     elif ((update['message']['text'].split())[1]) == 'start':
+        game_cities_lib(bot, update)
         update.message.reply_text('Давай поиграем. Твой город?')
+
     elif ((update['message']['text'].split())[1]) == 'stop':
         update.message.reply_text('До встречи, приходи поиграем еще')
     else:
-        game_cities_lib(bot,update)   
+        cities_game_player_move(bot,update)
+
+
+
+
+def cities_game_player_move (bot,update):
+    player_citi = ((update['message']['text'].split())[1])
+    with open('user_lib.txt','r', encoding= 'utf-8') as lib_dict:
+        dict = lib_dict.read()
+        print(dict)
+    #     dict.strip('\'')
+    # if player_citi in player_lib_dict.values():
+    #     letter = player_citi[-1]
+    #     update.message.reply_text(f'ОК, твой город {player_citi}, мне на {letter}')
+    #     del player_citi
+    #     return player_lib_dict
+    # else:
+    #     return update.message.reply_text ('Такого города нет или тв уже назвал его, попробуй еще раз')
+
+
 
 def game_cities_lib(bot,update):
+
     cities_lib = []
-    cities = open(r'C:\Users\zhogo\PycharmProjects\lesson_2\learn-homework-11\cities_lib.txt','r',encoding='utf-8')
+    player_lib_dict = {}
+    cities = open('cities_lib.txt','r',encoding='utf-8')
     cities_lib_open = cities.readlines()
     for cities_bad in cities_lib_open:
         cities = cities_bad.strip('\n')
         cities_lib.append(cities)
-    print(cities_lib)
+    chat_id = update['message']['chat']['id']
+    player_lib_dict[chat_id] = cities_lib
+    # cities.close()
+    with open('user_lib.txt','w',encoding='utf-8') as user_file:
+        user_file.write(player_lib_dict)
+    user_file.close()
+
+
+
 
 def full_moon(bot,update): 
     moon_date = ((update['message']['text'].split())[1])
